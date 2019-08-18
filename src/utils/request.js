@@ -20,7 +20,7 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(response => {
 	const res = response.data
 	if (res['success']) {
-		return res['result']
+		return res['data']
 	} else {
 		return Promise.reject('error')
 	}

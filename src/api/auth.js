@@ -1,12 +1,21 @@
 import request from '@/utils/request'
 
-export function login(username, password) {
+export function loginByUsername(phone, password) {
   const data = {
-    username,
+    phone,
     password
   }
   return request({
-    url: '/auth',
+    url: '/authorizations',
+    method: 'post',
+    data
+  })
+}
+
+export function loginByPhonePwd(phone, password) {
+  const data = {phone, password}
+  return request({
+    url: '/authorizations',
     method: 'post',
     data
   })
