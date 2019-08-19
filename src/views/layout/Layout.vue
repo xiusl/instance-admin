@@ -2,7 +2,7 @@
   <div>
     <el-container>
       <Sidebar />
-      <el-container>
+      <el-container direction="vertical">
         <Navbar />
 
         <el-main>
@@ -24,3 +24,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.el-main {
+  padding: 0;
+}
+</style>
