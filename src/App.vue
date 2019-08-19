@@ -11,9 +11,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang='scss'>
+@import './styles/font.css';
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'PTMono', 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #F0F2FD;
