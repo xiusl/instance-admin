@@ -5,7 +5,7 @@ export function spiderWeiboByUrl(url) {
     url
   }
   return request({
-    url: '/articles',
+    url: '/articles/spider',
     method: 'post',
     data
   })
@@ -13,8 +13,16 @@ export function spiderWeiboByUrl(url) {
 
 export function getWeiboByUrl(url) {
   return request({
-    url: '/articles',
+    url: '/articles/spider',
     method: 'get',
     params: {url:url}
+  })
+}
+
+export function getArticles(page, count) {
+  return request({
+    url: '/articles',
+    method: 'get',
+    params: {page:page,count:count}
   })
 }
