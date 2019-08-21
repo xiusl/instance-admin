@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import { getWeiboByUrl, spiderWeiboByUrl } from '@/api/article';
+
 export default {
   name: 'articleList',
   data() {
@@ -17,6 +19,19 @@ export default {
   methods: {
     add() {
       console.log(this.url)
+      spiderWeiboByUrl(this.url).then(data => {
+        console.log(data)
+        this.getWeibo()
+      })
+    },
+    getWeibo() {
+      getWeiboByUrl(this.url).then(data => {
+        console.log(data)
+      }).catch(err => {
+        setTimeout(() => {
+          this.getWeibo()
+        }, 2000)
+      })
     }
   }
 }
