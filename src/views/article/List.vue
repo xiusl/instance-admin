@@ -3,6 +3,14 @@
     <h3 style="margin-top:0;">List</h3>
     <div style="text-align:left">
       <el-input v-model="url" placeholder="url" style="width:480px;"></el-input>
+      <el-select v-model="type" placeholder="请选择">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+      </el-select>
       <el-button @click="add">Add</el-button>
     </div>
     <el-table
@@ -76,6 +84,17 @@ export default {
   name: 'articleList',
   data() {
     return {
+      options: [
+        {
+          value: 'weibo',
+          label: '微博'
+        },
+        {
+          value: 'wechat',
+          label: '微信'
+        }
+      ],
+      type: '',
       url: '',
       count: 0,
       pageSize: 10,
@@ -95,7 +114,7 @@ export default {
   methods: {
     add() {
       console.log(this.url)
-      spiderWeiboByUrl(this.url).then(data => {
+      spiderWeiboByUrl(this.url, this.type).then(data => {
         this.getWeibo()
       })
     },

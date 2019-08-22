@@ -1,8 +1,9 @@
 import request from '@/utils/request'
 
-export function spiderWeiboByUrl(url) {
+export function spiderWeiboByUrl(url,type) {
   const data = {
-    url
+    url,
+    type
   }
   return request({
     url: '/articles/spider',
