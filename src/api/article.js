@@ -27,3 +27,10 @@ export function getArticles(page, count) {
     params: {page:page,count:count}
   })
 }
+
+export function deleteArticle(id) {
+  return request({
+    url: '/articles/'+id,
+    method: 'delete',
+  })
+}

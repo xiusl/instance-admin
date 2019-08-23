@@ -20,9 +20,13 @@
       style="width: 100%;margin-top:20px;"
       >
       <el-table-column
+        type="index"
+        width="30">
+      </el-table-column>
+      <el-table-column
         prop="id"
         label="id"
-        width="60"
+        width="100"
         show-overflow-tooltip>
       </el-table-column>
       <el-table-column
@@ -57,9 +61,18 @@
       <el-table-column
         label="images">
         <template slot-scope="scope">
-          <template v-for="im in scope.row.images">
+          <img height="60" :src="scope.row.images[0]">
+     <!--     <template v-for="im in scope.row.images">
             <img height="60" :src="im">
-          </template>
+     </template> -->
+        </template>
+      </el-table-column>
+      <el-table-column
+        width="80"
+        label="Actions"
+        >
+        <template slot-scope="scope">
+          <el-button @click="handleDeleteClick(scope.row)" type="text" size="small">delete</el-button>
         </template>
       </el-table-column>
 
@@ -78,7 +91,7 @@
 
 <script>
 import moment from 'moment';
-import { getArticles, getWeiboByUrl, spiderWeiboByUrl } from '@/api/article';
+import { deleteArticle, getArticles, getWeiboByUrl, spiderWeiboByUrl } from '@/api/article';
 
 export default {
   name: 'articleList',
@@ -134,9 +147,17 @@ export default {
       return moment(date).format("YYYY-MM-DD HH:mm:ss")
     },
     pageChange(page) {
-      getArticles(page, pageSize).then(data => {
+      getArticles(page, this.pageSize).then(data => {
         this.article = data['articles']
       }) 
+    },
+    handleDeleteClick(row) {
+      console.log(row)
+      this.$confirm('确认要删除："'+row.title+'" ?').then(_ => {
+        deleteArticle(row.id).then(data => {
+          this.$message({message:'删除成功', type:'success'}) 
+        }) 
+      })
     }
   }
 }
