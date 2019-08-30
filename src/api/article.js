@@ -34,3 +34,11 @@ export function deleteArticle(id) {
     method: 'delete',
   })
 }
+
+export function createArticleSource(data) {
+  return request({
+    url: '/sources',
+    method: 'post',
+    data
+  })
+}

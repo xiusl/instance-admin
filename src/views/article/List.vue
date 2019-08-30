@@ -1,6 +1,9 @@
 <template>
   <div style="padding: 0 20px;">
-    <h3 style="margin-top:0;">List</h3>
+    <div style="display:flex;">
+      <h3 style="margin-top:0;">List</h3>
+      <router-link to="/art/source" style="margin-left:30px;">Source</router-link>
+    </div>
     <div style="text-align:left">
       <el-input v-model="url" placeholder="url" style="width:480px;"></el-input>
       <el-select v-model="type" placeholder="请选择">

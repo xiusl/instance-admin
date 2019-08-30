@@ -15,6 +15,10 @@ export const constantRouteMap = [
       {
         path: '',
         component: () => import('@/views/article/list')
+      },
+      {
+        path: 'source',
+        component: () => import('@/views/article/source')
       }
     ]
   }
