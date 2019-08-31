@@ -7,7 +7,10 @@
     <div>
       <el-button @click="addSourceClick">Add</el-button>
     </div>
-    <EditSource :visible="editVisible" @hideCallback="editHideHandle"/>
+    <EditSource 
+      :visible="editVisible" 
+      @hideCallback="editHideHandle"
+      @confirmCallback="editConfirmHandle"/>
   </div>
 </template>
 <script>
@@ -31,6 +34,10 @@ export default {
     editHideHandle() {
       console.log("123")
       this.editVisible = false
+    },
+    editConfirmHandle(val) {
+      console.log(val)
+    
     }
   }
 

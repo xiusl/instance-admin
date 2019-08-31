@@ -20,3 +20,11 @@ export function loginByPhonePwd(phone, password) {
     data
   })
 }
+
+export function getUploadToken(type) {
+  return request({
+    url: '/settings',
+    method: 'get',
+    params: {'mime_type':type}
+  })
+}
