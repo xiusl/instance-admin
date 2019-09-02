@@ -1,10 +1,24 @@
 <template>
-  <div>
-    <h3>Login</h3>
-    <div style="background-color:#FFF;width: 320px;margin: 100px auto; height: 430px">
-      <el-input placeholder="phone" v-model="phone" style="margin-top: 10px;"></el-input> 
-      <el-input placeholder="password" type="password" v-model="password" style="margin-top:10px;"></el-input>
-      <el-button @click="login" style="margin-top: 20px;">Login</el-button>
+  <div class="login-bg"> 
+    <div class="login-form"> 
+      <h3>Login</h3>
+      <el-input 
+        placeholder="phone" 
+        v-model="phone" 
+        style="margin-top: 10px;">
+      </el-input> 
+      <el-input 
+        placeholder="password" 
+        :type="passwordType" 
+        v-model="password" 
+        style="margin-top:10px;">
+        <el-button 
+          slot="append" 
+          icon="el-icon-view"
+          @click="showPassword">
+        </el-button>
+      </el-input>
+      <el-button @click="login" type="primary" style="margin-top: 20px;">Login</el-button>
     </div>
   </div>
 </template>
@@ -17,6 +31,7 @@ export default {
   data() {
     return {
       loading: false,
+      passwordType: 'password',
       phone: '',
       password: ''
     }
@@ -24,11 +39,40 @@ export default {
   methods: {
     login() {
       this.loading = true
-      this.$store.dispatch('LoginByPhonePwd', {phone:this.phone, password:this.password}).then(data => {
-        this.loading = false
-        this.$router.push({path: '/'})
-      })
+      this.$store.dispatch('LoginByPhonePwd', 
+        {phone:this.phone, password:this.password})
+        .then(data => {
+            this.$message({message:'登录成功', type:'success'})
+            this.loading = false
+            this.$router.push({path: '/'})
+        })
+        .catch(err => {
+          this.$message({message:'登录失败', type:'error'})
+        })
+    },
+    showPassword() {
+      if (this.passwordType == '') {
+        this.passwordType = 'password'
+      } else {
+        this.passwordType = ''
+      }
     }
   }
 }
 </script>
+<style scoped>
+.login-bg {
+  width:100%;
+  height:100%;
+  position: absolute;
+  background-color:#F0F2FD;
+}
+.login-bg .login-form {
+  background-color:#FFF;
+  width: 320px;
+  margin: 100px auto; 
+  height: 240px;
+  padding: 20px 20px;
+  border-radius: 10px;
+}
+</style>

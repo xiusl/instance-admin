@@ -1,8 +1,10 @@
 <template>
-  <div style="padding: 0 20px;">
+  <div style="padding: 0 32px;">
     <div style="display:flex;">
-      <h3 style="margin-top:0;">List</h3>
-      <router-link to="/art/source" style="margin-left:30px;">Source</router-link>
+      <el-tabs v-model="activeTab" @tab-click="tabClick">
+        <el-tab-pane label="List" name="list"></el-tab-pane>
+        <el-tab-pane label="Source" name="source"></el-tab-pane>
+      </el-tabs>
     </div>
     <div style="text-align:left">
       <el-input v-model="url" placeholder="url" style="width:480px;"></el-input>
@@ -110,12 +112,13 @@ export default {
           label: '微信'
         }
       ],
-      type: '',
+      type: 'weibo',
       url: '',
       count: 0,
       pageSize: 10,
       tableHeight: null,
-      article: []
+      article: [],
+      activeTab: "list"
     }
   },
   created() {
@@ -128,6 +131,12 @@ export default {
     })
   },
   methods: {
+    loadArticles (){
+      getArticles(1, this.pageSize).then(data =>{
+        this.count = data.count
+        this.article = data.articles
+      })
+    },
     add() {
       console.log(this.url)
       spiderWeiboByUrl(this.url, this.type).then(data => {
@@ -159,8 +168,15 @@ export default {
       this.$confirm('确认要删除："'+row.title+'" ?').then(_ => {
         deleteArticle(row.id).then(data => {
           this.$message({message:'删除成功', type:'success'}) 
+          this.loadArticles()
         }) 
       })
+    },
+    tabClick(tab, event) {
+      console.log(tab.name) 
+      if (tab.name == 'source') {
+        this.$router.push({path: '/art/source'})
+      }
     }
   }
 }

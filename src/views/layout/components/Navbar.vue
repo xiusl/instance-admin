@@ -50,7 +50,7 @@ export default {
 }
 .search {
   margin-top: 5px;
-  margin-left: 20px;
+  margin-left: 17px;
 }
 .search >>> .el-input__inner {
   height: 54px;

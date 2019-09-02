@@ -1,8 +1,10 @@
 <template>
-  <div style="padding: 0 20px;text-align:left;">
+  <div style="padding: 0 32px;text-align:left;">
     <div style="display:flex;">
-      <h3 style="margin-top:0px;">Source</h3>
-      <router-link to="/art" style="margin-left:30px;">List</router-link>
+      <el-tabs v-model="activeTab" @tab-click="tabClick">
+        <el-tab-pane label="List" name="list"></el-tab-pane>
+        <el-tab-pane label="Source" name="source"></el-tab-pane>
+      </el-tabs>
     </div>
     <div>
       <el-button @click="addSourceClick">Add</el-button>
@@ -23,7 +25,8 @@ export default {
   },
   data() {
     return {
-      editVisible: false 
+      editVisible: false,
+      activeTab: 'source'
     }
   },
   methods: {
@@ -38,6 +41,11 @@ export default {
     editConfirmHandle(val) {
       console.log(val)
     
+    },
+    tabClick(tab, event) {
+      if (tab.name == 'list') {
+        this.$router.push({path: '/art'})
+      }
     }
   }
 
