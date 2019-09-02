@@ -33,6 +33,11 @@
         label="id"
         width="100"
         show-overflow-tooltip>
+        <template slot-scope="scope">
+          <router-link :to="{path:'/art/'+scope.row.id}">
+            {{scope.row.id}}
+          </router-link>
+        </template>
       </el-table-column>
       <el-table-column
         prop="title"
@@ -40,16 +45,18 @@
         width="220"
         show-overflow-tooltip>
       </el-table-column>
+      <!--
       <el-table-column
         prop="content"
         label="content"
         width="200"
         show-overflow-tooltip>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="author"
         label="author"
-        width="100">
+        width="100"
+        show-overflow-tooltip>
       </el-table-column>
       <el-table-column
         prop="type"

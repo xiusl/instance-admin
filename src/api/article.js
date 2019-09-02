@@ -28,6 +28,13 @@ export function getArticles(page, count) {
   })
 }
 
+export function getArticleById(id) {
+  return request({
+    url: '/articles/'+id,
+    method: 'get'
+  })
+}
+
 export function deleteArticle(id) {
   return request({
     url: '/articles/'+id,

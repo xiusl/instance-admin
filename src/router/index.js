@@ -19,6 +19,10 @@ export const constantRouteMap = [
       {
         path: 'source',
         component: () => import('@/views/article/source')
+      },
+      {
+        path: ':id',
+        component: () => import('@/views/article/detail')
       }
     ]
   },
