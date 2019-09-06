@@ -12,6 +12,7 @@ const user = {
     },
     SET_NAME: (state, name) => {
       state.name = name
+      setName(name)
     }
   },
   actions: {
@@ -24,7 +25,6 @@ const user = {
             commit('SET_TOKEN', data.token)
             commit('SET_NAME', data.name)
             setToken(data.token)
-            setName(data.name)
             resolve(data)
           })
           .catch(error => {

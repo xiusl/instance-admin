@@ -1,4 +1,6 @@
 import axios from 'axios'
+import store from '@/store'
+import { getToken } from '@/utils/auth'
 
 const service = axios.create({
   baseURL: process.env.BASE_URL,
@@ -6,6 +8,9 @@ const service = axios.create({
 })
 
 service.interceptors.request.use(config => {
+  if (store.getters.token) {
+    config.headers['X-Token'] = getToken()
+  }
 	if (config.method == 'get') {
 		config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
 	} else {

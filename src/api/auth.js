@@ -28,3 +28,11 @@ export function getUploadToken(type) {
     params: {'mime_type':type}
   })
 }
+
+export function getVerifyCode(key) {
+  return request({
+    url: '/verifycodes',
+    method: 'get',
+    params: {key:key}
+  })
+}

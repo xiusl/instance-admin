@@ -8,7 +8,7 @@
       {{name}}
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item command="logout">Logout</el-dropdown-item>
-        <el-dropdown-item>Setting</el-dropdown-item>
+        <el-dropdown-item command="setting">Setting</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>  
     </div>
@@ -33,12 +33,17 @@ export default {
     handleCommand(cmd) {
       if (cmd == 'logout') {
         this.logout()
+      } else if (cmd == 'setting') {
+        this.setting()
       }
     },
     logout() {
       this.$store.dispatch('LogOut').then(() => {
         location.reload()
       })
+    },
+    setting() {
+      this.$router.push({path: '/setting'})
     }
   }
 }
