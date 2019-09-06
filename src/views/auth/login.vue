@@ -25,7 +25,6 @@
 
 
 <script>
-import { loginByUsername } from '@/api/auth'
 export default {
   name: 'Login',
   data() {

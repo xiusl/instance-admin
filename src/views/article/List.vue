@@ -103,7 +103,7 @@
 
 <script>
 import moment from 'moment';
-import { deleteArticle, getArticles, getWeiboByUrl, spiderWeiboByUrl } from '@/api/article';
+import ArtApi from '@/api/article'
 
 export default {
   name: 'articleList',
@@ -132,26 +132,25 @@ export default {
   },
   mounted() {
     this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop-120;
-    getArticles(1, this.pageSize).then(data =>{
+    ArtApi.getArticles(1, this.pageSize).then(data =>{
       this.count = data['count']
       this.article = data['articles']
     })
   },
   methods: {
     loadArticles (){
-      getArticles(1, this.pageSize).then(data =>{
+      ArtApi.getArticles(1, this.pageSize).then(data =>{
         this.count = data.count
         this.article = data.articles
       })
     },
     add() {
-      console.log(this.url)
-      spiderWeiboByUrl(this.url, this.type).then(data => {
+      ArtApi.spiderWeiboByUrl(this.url, this.type).then(data => {
         this.getWeibo()
       })
     },
     getWeibo() {
-      getWeiboByUrl(this.url).then(data => {
+      ArtApi.getWeiboByUrl(this.url).then(data => {
         this.article.push(data)
       }).catch(err => {
         setTimeout(() => {
@@ -166,21 +165,18 @@ export default {
       return moment(date).format("YYYY-MM-DD HH:mm:ss")
     },
     pageChange(page) {
-      getArticles(page, this.pageSize).then(data => {
-        this.article = data['articles']
-      }) 
+      this.page = page
+      this.loadArticles()
     },
     handleDeleteClick(row) {
-      console.log(row)
       this.$confirm('确认要删除："'+row.title+'" ?').then(_ => {
-        deleteArticle(row.id).then(data => {
+        ArtApi.deleteArticle(row.id).then(data => {
           this.$message({message:'删除成功', type:'success'}) 
           this.loadArticles()
         }) 
       })
     },
     tabClick(tab, event) {
-      console.log(tab.name) 
       if (tab.name == 'source') {
         this.$router.push({path: '/art/source'})
       }

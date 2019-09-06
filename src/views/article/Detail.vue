@@ -14,7 +14,7 @@
   </div>
 </template>
 <script>
-import {getArticleById } from '@/api/article';
+import ArtApi from '@/api/article';
 
 export default {
   name: 'articleDetail',
@@ -35,8 +35,7 @@ export default {
   },
   methods: {
     loadArticle() {
-      getArticleById(this.id).then(data => {
-        console.log(data)
+      ArtApi.getArticleById(this.id).then(data => {
         this.article = data
       })
     },

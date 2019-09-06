@@ -1,4 +1,4 @@
-import { loginByPhonePwd } from '@/api/auth'
+import UserApi from '@/api/user'
 import { setToken, getToken, rmToken, getName, setName, rmName } from '@/utils/auth'
 
 const user = {
@@ -20,7 +20,7 @@ const user = {
       const phone = userInfo.phone.trim()
       const password = userInfo.password.trim()
       return new Promise((resolve, reject) => {
-        loginByPhonePwd(phone, password)
+        UserApi.loginByPhonePwd(phone, password)
           .then(data => {
             commit('SET_TOKEN', data.token)
             commit('SET_NAME', data.name)

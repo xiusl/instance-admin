@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { getUploadToken } from '@/api/auth'
+import UserApi from '@/api/user'
 import { getFileMD5 } from '@/utils/upload'
 import axios from 'axios'
 export default {
@@ -110,9 +110,8 @@ export default {
       console.log(val) 
     },
     fileChange(file, fileList) {
-      console.log(file) 
       var type = file.raw.type
-      getUploadToken(type).then(data => {
+      UserApi.getUploadToken(type).then(data => {
         console.log(data)
         getFileMD5(file.raw, hash => {
           console.log(hash)

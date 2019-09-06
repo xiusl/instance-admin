@@ -89,8 +89,7 @@
 </template>
 
 <script>
-import { getCurrentUser, editUser, editUserEmail } from '@/api/user';
-import { getUploadToken, getVerifyCode } from '@/api/auth';
+import UserApi from '@/api/user';
 import { uploadImage } from '@/utils/upload';
 
 export default {
@@ -108,7 +107,7 @@ export default {
   },
   methods: {
     loadData() {
-      getCurrentUser().then(data => {
+      UserApi.getCurrentUser().then(data => {
         this.user = data
       })
     },
@@ -128,7 +127,7 @@ export default {
       })
     },
     editConfirmClick() {
-      editUser(this.user.id, this.user).then(data => {
+      UserApi.editUser(this.user.id, this.user).then(data => {
         this.$message({message:'Edit success',type:'success'})
         this.editVisible = false
         this.$store.commit('SET_NAME', data.name)
@@ -138,13 +137,13 @@ export default {
       this.emailVisible = true
     },
     emailConfirmClick() {
-      editUserEmail(this.user.id, this.user.email, this.code).then(data => {
+      UserApi.editUserEmail(this.user.id, this.user.email, this.code).then(data => {
         this.$message({message:'Email Change Success',type:'success'})
         this.emailVisible = false
       }) 
     },
     sendCodeClick() {
-      getVerifyCode(this.user.email).then(data => {
+      UserApi.getVerifyCode(this.user.email).then(data => {
         this.$message({message:'Send Email Code Success',type:'success'}) 
       }).catch(err => {
         this.$message({message:err.error,type:'error'})
