@@ -5,10 +5,13 @@
     </el-page-header>
   </div>
   <h3>{{article.title}}</h3>
-  <div style="width:800px;overflow:auto;margin:20px auto;" :style="{height:textHeight}">
+  <div style="width:800px;overflow:auto;margin:20px auto;text-align:left;" :style="{height:textHeight}">
     <p v-html="article.transcoding"></p>
     <template v-if="article.type=='weibo'">
     <el-image v-for="url in article.images" :key="url" :src="url" lazy></el-image>
+    <div v-for="url in article.images" :key="url" style="text-align:center;">
+      <el-image :src="url" :preview-src-list="article.images" lazy></el-image>
+    </div>
     </template>
   </div>
   </div>

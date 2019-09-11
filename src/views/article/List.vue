@@ -117,6 +117,10 @@ export default {
         {
           value: 'wechat',
           label: '微信'
+        },
+        {
+          value: 'kr36',
+          label: '36氪'
         }
       ],
       type: 'weibo',
@@ -131,7 +135,7 @@ export default {
   created() {
   },
   mounted() {
-    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop-120;
+    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop-180;
     ArtApi.getArticles(1, this.pageSize).then(data =>{
       this.count = data['count']
       this.article = data['articles']
@@ -139,19 +143,23 @@ export default {
   },
   methods: {
     loadArticles (){
-      ArtApi.getArticles(1, this.pageSize).then(data =>{
+      ArtApi.getArticles(this.page, this.pageSize).then(data =>{
         this.count = data.count
         this.article = data.articles
       })
     },
     add() {
+      if (this.url.length == 0) {
+        this.$message({message:'Need URL', type:'error'})
+        return 
+      }
       ArtApi.spiderWeiboByUrl(this.url, this.type).then(data => {
         this.getWeibo()
       })
     },
     getWeibo() {
       ArtApi.getWeiboByUrl(this.url).then(data => {
-        this.article.push(data)
+        this.article.splice(0, 0, data)
       }).catch(err => {
         setTimeout(() => {
           this.getWeibo()
