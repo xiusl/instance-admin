@@ -121,6 +121,10 @@ export default {
         {
           value: 'kr36',
           label: '36氪'
+        },
+        {
+          value: 'laohu',
+          label: '老虎证券'
         }
       ],
       type: 'weibo',
