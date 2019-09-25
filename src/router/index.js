@@ -7,6 +7,10 @@ import Layout from '@/views/layout/Layout'
 
 export const constantRouteMap = [
   {path: '/login', component: () => import('@/views/auth/login'), hidden: true},
+  {
+    path: '/articles/:id', 
+    component: () => import('@/views/article/detailh5.vue')
+  },
   {path: '/', component: Layout},
   {
     path: '/art', 
@@ -50,6 +54,7 @@ export const constantRouteMap = [
 ]
 
 export default new Router({
+  mode: 'history',
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouteMap
 })

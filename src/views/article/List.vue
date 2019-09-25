@@ -44,6 +44,11 @@
         label="title"
         width="220"
         show-overflow-tooltip>
+        <template slot-scope="scope">
+          <router-link :to="{path:'/articles/'+scope.row.id}">
+            {{scope.row.title}}
+          </router-link>
+        </template>
       </el-table-column>
       <!--
       <el-table-column
