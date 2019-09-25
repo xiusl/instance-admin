@@ -67,7 +67,7 @@ export default {
   text-align: left;
 }
 .article-h5 .content img{
-  width: 100%;
+  max-width: 100% !important;
 }
 .article-h5 .content {
   line-height: 1.5em;
