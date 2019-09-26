@@ -69,7 +69,7 @@
         width="80">
       </el-table-column>
       <el-table-column
-        prop="created_at"
+        prop="published_at"
         label="pub_at"
         width="200"
         :formatter="dateFormat"
