@@ -85,11 +85,12 @@
         </template>
       </el-table-column>
       <el-table-column
-        width="80"
+        width="140"
         label="Actions"
         >
         <template slot-scope="scope">
           <el-button @click="handleDeleteClick(scope.row)" type="text" size="small">delete</el-button>
+          <el-button @click="handleEditClick(scope.row)" type="text" size="small">editCon</el-button>
         </template>
       </el-table-column>
 
@@ -192,6 +193,9 @@ export default {
           this.loadArticles()
         }) 
       })
+    },
+    handleEditClick(row) {
+      this.$router.push({path:'art/'+ row.id+'/editcontent'})
     },
     tabClick(tab, event) {
       if (tab.name == 'source') {

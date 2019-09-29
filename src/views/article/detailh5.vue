@@ -65,6 +65,7 @@ export default {
 }
 .article-h5 .content {
   text-align: left;
+  word-wrap: break-word!important;
 }
 .article-h5 .content img{
   max-width: 100% !important;

@@ -27,6 +27,10 @@ export const constantRouteMap = [
       {
         path: ':id',
         component: () => import('@/views/article/detail')
+      },
+      {
+        path: ':id/editcontent',
+        component: () => import('@/views/article/editContent')
       }
     ]
   },

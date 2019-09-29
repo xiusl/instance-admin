@@ -49,6 +49,14 @@ const ArtApi = {
       method: 'post',
       data
     })
+  },
+
+  editContent(id, data) {
+    return request({
+      url: '/articles/'+id,
+      method: 'patch',
+      data
+    })
   }
 }
 
