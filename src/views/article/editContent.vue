@@ -1,11 +1,11 @@
 <template>
-  <div class="edit-content">
+  <div class="edit-content" style="padding: 0 20px">
     <h3>Edit Content</h3>
     <el-button @click="autoFormatSelection">formate</el-button>
     <el-button @click="save()"></el-button>
     <div style="display:flex;">
     <textarea ref="codeEdit" class="code" :style="{height: tableHeight+ 'px'}"></textarea>
-      <div style="min-width: 320px; overflow-x:hidden;padding:10px;line-height:1.5em;" :style="{height: tableHeight+ 'px'}" class="content">
+      <div style="min-width: 320px; max-width: 360px; overflow-x:hidden;padding:10px;line-height:1.5em;" :style="{height: tableHeight+ 'px'}" class="content">
         <p v-html="code"></p>
       </div>
     </div>
@@ -78,6 +78,9 @@ export default {
 }
 </script>
 <style>
+.el-container {
+  flex-basis: 0;
+}
 .edit-content {
   text-align: left;
 }

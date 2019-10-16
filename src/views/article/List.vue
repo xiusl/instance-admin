@@ -2,8 +2,8 @@
   <div style="padding: 0 32px;">
     <div style="display:flex;">
       <el-tabs v-model="activeTab" @tab-click="tabClick">
-        <el-tab-pane label="List" name="list"></el-tab-pane>
-        <el-tab-pane label="Source" name="source"></el-tab-pane>
+        <el-tab-pane label="列表" name="list"></el-tab-pane>
+        <el-tab-pane label="来源" name="source"></el-tab-pane>
       </el-tabs>
     </div>
     <div style="text-align:left">
@@ -16,7 +16,7 @@
         :value="item.value">
       </el-option>
       </el-select>
-      <el-button @click="add">Add</el-button>
+      <el-button @click="add">添加</el-button>
     </div>
     <el-table
       ref="table"
@@ -26,7 +26,7 @@
       >
       <el-table-column
         type="index"
-        width="30">
+        width="40">
       </el-table-column>
       <el-table-column
         prop="id"
@@ -41,7 +41,7 @@
       </el-table-column>
       <el-table-column
         prop="title"
-        label="title"
+        label="标题"
         width="220"
         show-overflow-tooltip>
         <template slot-scope="scope">
@@ -59,24 +59,24 @@
       </el-table-column> -->
       <el-table-column
         prop="author"
-        label="author"
+        label="作者"
         width="100"
         show-overflow-tooltip>
       </el-table-column>
       <el-table-column
         prop="type"
-        label="type"
+        label="类型"
         width="80">
       </el-table-column>
       <el-table-column
         prop="published_at"
-        label="pub_at"
+        label="发布日期"
         width="200"
         :formatter="dateFormat"
         >
       </el-table-column>
       <el-table-column
-        label="images">
+        label="图片">
         <template slot-scope="scope">
           <img height="60" :src="scope.row.images[0]">
      <!--     <template v-for="im in scope.row.images">
@@ -86,11 +86,11 @@
       </el-table-column>
       <el-table-column
         width="140"
-        label="Actions"
+        label="操作"
         >
         <template slot-scope="scope">
-          <el-button @click="handleDeleteClick(scope.row)" type="text" size="small">delete</el-button>
-          <el-button @click="handleEditClick(scope.row)" type="text" size="small">editCon</el-button>
+          <el-button @click="handleDeleteClick(scope.row)" type="text" size="small">删除</el-button>
+          <el-button @click="handleEditClick(scope.row)" type="text" size="small">编辑内容</el-button>
         </template>
       </el-table-column>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="login-bg"> 
     <div class="login-form"> 
-      <h3>Login</h3>
+      <h3>登录</h3>
       <el-input 
         placeholder="phone" 
         v-model="phone" 
@@ -18,7 +18,7 @@
           @click="showPassword">
         </el-button>
       </el-input>
-      <el-button @click="login" type="primary" style="margin-top: 20px;" @key.enter="login">Login</el-button>
+      <el-button @click="login" type="primary" style="margin-top: 20px;" @key.enter="login">登录</el-button>
     </div>
   </div>
 </template>

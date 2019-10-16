@@ -2,12 +2,12 @@
   <div style="padding: 0 32px;text-align:left;">
     <div style="display:flex;">
       <el-tabs v-model="activeTab" @tab-click="tabClick">
-        <el-tab-pane label="List" name="list"></el-tab-pane>
-        <el-tab-pane label="Source" name="source"></el-tab-pane>
+        <el-tab-pane label="列表" name="list"></el-tab-pane>
+        <el-tab-pane label="来源" name="source"></el-tab-pane>
       </el-tabs>
     </div>
     <div>
-      <el-button @click="addSourceClick">Add</el-button>
+      <el-button @click="addSourceClick">添加</el-button>
     </div>
     <EditSource 
       :visible="editVisible" 

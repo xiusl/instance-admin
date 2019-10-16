@@ -6,10 +6,11 @@ Vue.use(Router)
 import Layout from '@/views/layout/Layout'
 
 export const constantRouteMap = [
-  {path: '/login', component: () => import('@/views/auth/login'), hidden: true},
+  {path: '/login', component: () => import('@/views/auth/login'), hidden: true, meta: { title: '登录'}},
   {
     path: '/articles/:id', 
-    component: () => import('@/views/article/detailh5.vue')
+    component: () => import('@/views/article/detailh5.vue'),
+    meta: { title: '哩嗑' }
   },
   {path: '/', component: Layout},
   {
@@ -18,19 +19,23 @@ export const constantRouteMap = [
     children: [
       {
         path: '',
-        component: () => import('@/views/article/list')
+        component: () => import('@/views/article/list'),
+        meta: { title: '文章列表' }
       },
       {
         path: 'source',
-        component: () => import('@/views/article/source')
+        component: () => import('@/views/article/source'),
+        meta: { title: '文章来源' }
       },
       {
         path: ':id',
-        component: () => import('@/views/article/detail')
+        component: () => import('@/views/article/detail'),
+        meta: { title: '文章详情' }
       },
       {
         path: ':id/editcontent',
-        component: () => import('@/views/article/editContent')
+        component: () => import('@/views/article/editContent'),
+        meta: { title: '编辑文章' }
       }
     ]
   },

@@ -22,3 +22,13 @@ new Vue({
   store,
   render: h => h(App)
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+    document.title = '哩嗑后台 - ' + to.meta.title;
+  } else {
+    document.title = '哩嗑后台'
+  }
+  next();
+
+});

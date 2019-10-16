@@ -2,7 +2,7 @@
   <div class="sidebar">
     <div class="logo">
       <router-link :to="{path:'/'}">
-      <p style="">OneSay</p>
+        <p style="font-weight: 500">哩嗑</p>
       </router-link>
     </div>
     <div style="margin-top: 32px; text-align:left;padding: 0 32px;">
@@ -31,9 +31,9 @@ export default {
   data() {
     return {
       navitems: [
-        {label:'Dash',value:'dashboard',path:'/dashboard'},
-        {label:'Say',value:'say',path:'/say'},
-        {label:'Art',value:'art',path:'/art'},
+        {label:'统计',value:'dashboard',path:'/dashboard'},
+        {label:'一言',value:'say',path:'/say'},
+        {label:'文章',value:'art',path:'/art'},
       ],
       curitem: ''
     }
@@ -49,7 +49,7 @@ export default {
 
 <style scoped>
 .sidebar {
-  width: 220px;
+  width: 220px; 
   background-color: #fff;
   box-shadow: 3px 0px 2px -2px rgba(0,0,0,0.1); 
 }

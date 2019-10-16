@@ -44,6 +44,7 @@ export default {
         var dt = new Date(d)
         var fd = moment(dt).format("YYYY-MM-DD HH:mm:ss")
         this.article['published_at'] = fd
+        document.title = data['title']
       })
     }
   }
