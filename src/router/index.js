@@ -40,6 +40,13 @@ export const constantRouteMap = [
     ]
   },
   {
+    path: '/users',
+    component: Layout,
+    children: [
+      { path: '', component: () => import('@/views/user/index')}
+    ]
+  },
+  {
     path: '/say',
     component: Layout,
     children: [

@@ -70,6 +70,13 @@ const UserApi = {
         'password': newPwd
       }
     })
+  },
+  getUsers(page, count) {
+    return request({
+      url: '/users',
+      methods: 'post',
+      params: {page:page, count:count}
+    })
   }
 }
 export default UserApi;

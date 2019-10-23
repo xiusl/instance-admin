@@ -34,6 +34,7 @@ export default {
         {label:'统计',value:'dashboard',path:'/dashboard'},
         {label:'一言',value:'say',path:'/say'},
         {label:'文章',value:'art',path:'/art'},
+        {label:'用户',value:'users',path:'/users'},
       ],
       curitem: ''
     }
