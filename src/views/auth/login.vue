@@ -46,6 +46,7 @@ export default {
         .then(data => {
             this.$message({message:'登录成功', type:'success'})
             this.loading = false
+            this.keyupUnBind()
             this.$router.push({path: '/'})
         })
         .catch(err => {
@@ -66,6 +67,9 @@ export default {
           this.login()
         }
       }
+    },
+    keyupUnBind() {
+      document.onkeydown = e => {}
     }
   }
 }
