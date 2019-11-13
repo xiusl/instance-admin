@@ -57,6 +57,21 @@ const ArtApi = {
       method: 'patch',
       data
     })
+  },
+
+  getSources(page, count) {
+    return request({
+      url: '/sources',
+      method: 'get',
+      params: {page:page,count:count}
+    })
+  },
+  createSource(data) {
+    return request({
+      url: '/sources',
+      method: 'post',
+      data
+    })
   }
 }
 

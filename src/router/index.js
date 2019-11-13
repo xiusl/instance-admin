@@ -66,6 +66,13 @@ export const constantRouteMap = [
     children: [
       {path: '', component: () => import('@/views/setting/index')}
     ]
+  },
+  {
+    path: '/source',
+    component: Layout,
+    children: [
+      { path: '', component: () => import('@/views/source/index') }
+    ]
   }
 ]
 
