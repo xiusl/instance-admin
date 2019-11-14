@@ -95,7 +95,7 @@
       </el-table-column>
 
     </el-table>
-    <div style="text-align:left;margin-top:10px;">
+    <div style="display:flex;justify-content: space-between;margin-top:10px;">
       <el-pagination
         hide-on-single-page
         @current-change="pageChange"
@@ -103,6 +103,7 @@
         :total="count"
         :page-size="pageSize">
       </el-pagination>
+      <div>文章总数：{{count}}</div>
     </div>
   </div>
 </template>
@@ -139,17 +140,16 @@ export default {
       pageSize: 10,
       tableHeight: null,
       article: [],
-      activeTab: "list"
+      activeTab: "list",
+      cursor: '',
+      direction: 1
     }
   },
   created() {
   },
   mounted() {
     this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop-180;
-    ArtApi.getArticles(1, this.pageSize).then(data =>{
-      this.count = data['count']
-      this.article = data['articles']
-    })
+    this.loadArticles()
   },
   methods: {
     loadArticles (){

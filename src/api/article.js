@@ -29,6 +29,14 @@ const ArtApi = {
     })
   },
 
+  getArticlesById(id, direction, count) {
+    return request({
+      url: '/articles',
+      method: 'get',
+      params: {cursor:id,direction:direction,count:count}
+    })
+  },
+
   getArticleById(id) {
     return request({
       url: '/articles/'+id,
