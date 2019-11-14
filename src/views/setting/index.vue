@@ -30,7 +30,10 @@
           <td>{{user.level}}</td>
         </tr>
       </table>
-      <el-button @click="editUserClick">Edit</el-button>
+      <div style="text-align:center">
+        <el-button @click="editUserClick">Edit</el-button>
+        <el-button @click="editPasswordClick">Edit Password</el-button>
+      </div>
     </div>
 
     <el-dialog :visible.sync="editVisible" title="Edit">
@@ -85,6 +88,19 @@
 
       </div>
     </el-dialog>
+    <el-dialog :visible.sync="edPwdVisible" title="Edit Password">
+      <div>
+        <el-form :model="user" label-width="120px">
+          <el-form-item label="Old password">
+            <el-input v-model="oldPassword"></el-input>
+          </el-form-item>
+          <el-form-item label="New password">
+            <el-input v-model="newPassword"></el-input>
+          </el-form-item>
+        </el-form>
+        <el-button @click="pwdConfirmClick">Confirm</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -99,7 +115,10 @@ export default {
       user: {},
       editVisible: false,
       emailVisible: false,
-      code: ''
+      edPwdVisible: false,
+      code: '',
+      oldPassword: '',
+      newPassword: ''
     }
   },
   mounted() {
@@ -148,6 +167,19 @@ export default {
       }).catch(err => {
         this.$message({message:err.error,type:'error'})
       }) 
+    },
+    editPasswordClick() {
+      this.edPwdVisible = true
+    },
+    pwdConfirmClick() {
+      UserApi.editPassword(this.user.id, this.newPassword, this.oldPassword).then(data => {
+        console.log(data)
+        this.$message({message:'Edit success',type:'success'}) 
+        this.$store.commit('SET_TOKEN', data.token)
+        this.edPwdVisible = false
+      }).catch(err => {
+        this.$message({message:err.error,type:'error'})
+      })    
     }
   }
 }

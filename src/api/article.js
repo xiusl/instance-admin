@@ -29,6 +29,14 @@ const ArtApi = {
     })
   },
 
+  getArticlesById(id, direction, count) {
+    return request({
+      url: '/articles',
+      method: 'get',
+      params: {cursor:id,direction:direction,count:count}
+    })
+  },
+
   getArticleById(id) {
     return request({
       url: '/articles/'+id,
@@ -44,6 +52,29 @@ const ArtApi = {
   },
 
   createArticleSource(data) {
+    return request({
+      url: '/sources',
+      method: 'post',
+      data
+    })
+  },
+
+  editContent(id, data) {
+    return request({
+      url: '/articles/'+id,
+      method: 'patch',
+      data
+    })
+  },
+
+  getSources(page, count) {
+    return request({
+      url: '/sources',
+      method: 'get',
+      params: {page:page,count:count}
+    })
+  },
+  createSource(data) {
     return request({
       url: '/sources',
       method: 'post',

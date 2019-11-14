@@ -1,14 +1,14 @@
 <template>
   <div class="my-header" style="height: 64px;display:flex;justify-content: space-between;">
     <div>
-      <el-input v-model="keyword" class="search" placeholder="Search"></el-input>
+      <el-input v-model="keyword" class="search" placeholder="搜索"></el-input>
     </div>
     <div>
     <el-dropdown trigger="click" @command="handleCommand" size="medium" split-button>
       {{name}}
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item command="logout">Logout</el-dropdown-item>
-        <el-dropdown-item command="setting">Setting</el-dropdown-item>
+        <el-dropdown-item command="setting">设置</el-dropdown-item>
+        <el-dropdown-item command="logout">退出</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>  
     </div>

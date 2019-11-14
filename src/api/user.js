@@ -60,6 +60,23 @@ const UserApi = {
       method: 'get',
       params: {key:key}
     })
+  },
+  editPassword(id, newPwd, oldPwd) {
+    return request({
+      url: '/users/'+id,
+      method: 'post',
+      data: {
+        'old_password': oldPwd,
+        'password': newPwd
+      }
+    })
+  },
+  getUsers(page, count) {
+    return request({
+      url: '/users',
+      methods: 'post',
+      params: {page:page, count:count}
+    })
   }
 }
 export default UserApi;

@@ -2,8 +2,8 @@
   <div style="padding: 0 32px;">
     <div style="display:flex;">
       <el-tabs v-model="activeTab" @tab-click="tabClick">
-        <el-tab-pane label="List" name="list"></el-tab-pane>
-        <el-tab-pane label="Source" name="source"></el-tab-pane>
+        <el-tab-pane label="列表" name="list"></el-tab-pane>
+        <el-tab-pane label="来源" name="source"></el-tab-pane>
       </el-tabs>
     </div>
     <div style="text-align:left">
@@ -16,7 +16,7 @@
         :value="item.value">
       </el-option>
       </el-select>
-      <el-button @click="add">Add</el-button>
+      <el-button @click="add">添加</el-button>
     </div>
     <el-table
       ref="table"
@@ -26,7 +26,7 @@
       >
       <el-table-column
         type="index"
-        width="30">
+        width="40">
       </el-table-column>
       <el-table-column
         prop="id"
@@ -41,7 +41,7 @@
       </el-table-column>
       <el-table-column
         prop="title"
-        label="title"
+        label="标题"
         width="220"
         show-overflow-tooltip>
         <template slot-scope="scope">
@@ -59,24 +59,24 @@
       </el-table-column> -->
       <el-table-column
         prop="author"
-        label="author"
+        label="作者"
         width="100"
         show-overflow-tooltip>
       </el-table-column>
       <el-table-column
         prop="type"
-        label="type"
+        label="类型"
         width="80">
       </el-table-column>
       <el-table-column
-        prop="created_at"
-        label="pub_at"
+        prop="published_at"
+        label="发布日期"
         width="200"
         :formatter="dateFormat"
         >
       </el-table-column>
       <el-table-column
-        label="images">
+        label="图片">
         <template slot-scope="scope">
           <img height="60" :src="scope.row.images[0]">
      <!--     <template v-for="im in scope.row.images">
@@ -85,16 +85,17 @@
         </template>
       </el-table-column>
       <el-table-column
-        width="80"
-        label="Actions"
+        width="140"
+        label="操作"
         >
         <template slot-scope="scope">
-          <el-button @click="handleDeleteClick(scope.row)" type="text" size="small">delete</el-button>
+          <el-button @click="handleDeleteClick(scope.row)" type="text" size="small">删除</el-button>
+          <el-button @click="handleEditClick(scope.row)" type="text" size="small">编辑内容</el-button>
         </template>
       </el-table-column>
 
     </el-table>
-    <div style="text-align:left;margin-top:10px;">
+    <div style="display:flex;justify-content: space-between;margin-top:10px;">
       <el-pagination
         hide-on-single-page
         @current-change="pageChange"
@@ -102,6 +103,7 @@
         :total="count"
         :page-size="pageSize">
       </el-pagination>
+      <div>文章总数：{{count}}</div>
     </div>
   </div>
 </template>
@@ -138,17 +140,16 @@ export default {
       pageSize: 10,
       tableHeight: null,
       article: [],
-      activeTab: "list"
+      activeTab: "list",
+      cursor: '',
+      direction: 1
     }
   },
   created() {
   },
   mounted() {
     this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop-180;
-    ArtApi.getArticles(1, this.pageSize).then(data =>{
-      this.count = data['count']
-      this.article = data['articles']
-    })
+    this.loadArticles()
   },
   methods: {
     loadArticles (){
@@ -192,6 +193,9 @@ export default {
           this.loadArticles()
         }) 
       })
+    },
+    handleEditClick(row) {
+      this.$router.push({path:'art/'+ row.id+'/editcontent'})
     },
     tabClick(tab, event) {
       if (tab.name == 'source') {

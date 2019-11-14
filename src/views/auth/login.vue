@@ -1,7 +1,7 @@
 <template>
   <div class="login-bg"> 
     <div class="login-form"> 
-      <h3>Login</h3>
+      <h3>登录</h3>
       <el-input 
         placeholder="phone" 
         v-model="phone" 
@@ -18,7 +18,7 @@
           @click="showPassword">
         </el-button>
       </el-input>
-      <el-button @click="login" type="primary" style="margin-top: 20px;">Login</el-button>
+      <el-button @click="login" type="primary" style="margin-top: 20px;" @key.enter="login">登录</el-button>
     </div>
   </div>
 </template>
@@ -35,6 +35,9 @@ export default {
       password: ''
     }
   },
+  created() {
+    this.keyupBind()
+  },
   methods: {
     login() {
       this.loading = true
@@ -43,6 +46,7 @@ export default {
         .then(data => {
             this.$message({message:'登录成功', type:'success'})
             this.loading = false
+            this.keyupUnBind()
             this.$router.push({path: '/'})
         })
         .catch(err => {
@@ -55,6 +59,17 @@ export default {
       } else {
         this.passwordType = ''
       }
+    },
+    keyupBind() {
+      document.onkeydown=e=>{
+        let _keyCode=window.event.keyCode
+        if (_keyCode === 13) {
+          this.login()
+        }
+      }
+    },
+    keyupUnBind() {
+      document.onkeydown = e => {}
     }
   }
 }

@@ -6,9 +6,9 @@
       <p v-html="article.transcoding"></p>
 
       <template v-if="article.type=='weibo'">
-        <div class="sudoku_row">
-        <div class="sudoku_item" v-for="url in article.images" :key="url" style="text-align:center;">
-          <el-image :src="url" style="width: 100px; height: 100px" :preview-src-list="article.images" lazy></el-image>
+        <div class="sudoku_row1">
+        <div class="sudoku_item1" v-for="url in article.images" :key="url" style="text-align:center;">
+          <el-image :src="url" :preview-src-list="article.images" lazy></el-image>
         </div>
         </div>
       </template>
@@ -44,6 +44,7 @@ export default {
         var dt = new Date(d)
         var fd = moment(dt).format("YYYY-MM-DD HH:mm:ss")
         this.article['published_at'] = fd
+        document.title = data['title']
       })
     }
   }
@@ -65,6 +66,7 @@ export default {
 }
 .article-h5 .content {
   text-align: left;
+  word-wrap: break-word!important;
 }
 .article-h5 .content img{
   max-width: 100% !important;
