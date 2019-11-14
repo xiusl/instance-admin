@@ -5,7 +5,7 @@
         <p style="font-weight: 500">哩嗑</p>
       </router-link>
     </div>
-    <div style="margin-top: 32px; text-align:left;padding: 0 32px;">
+    <div style="margin-top: 32px; text-align:left;padding: 0 12px;">
       <div v-for="item in navitems" :key="item.value" class="item">
         <router-link :to="{path: item.path}" :style="{color:(item.value==curitem?'#409EFF':'#232323')}">
           {{item.label}}
@@ -71,9 +71,11 @@ export default {
   width: 100%;
   display: block;
   height: 48px;
-  
+  line-height: 48px;  
+  margin-left: 12px;
 }
-.sidebar .item a:hover {
+.sidebar .item:hover {
   color: #AFB8F2;
+  background-color: #F2F4F8;
 }
 </style>
