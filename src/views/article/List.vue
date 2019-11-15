@@ -99,7 +99,7 @@
       <el-pagination
         hide-on-single-page
         @current-change="pageChange"
-        layout="prev, pager, next"
+        layout="prev, next"
         :total="count"
         :page-size="pageSize">
       </el-pagination>

@@ -51,9 +51,10 @@ export default {
 
 <style scoped>
 .sidebar {
-  width: 220px; 
+  width: 200px; 
   background-color: #fff;
   box-shadow: 3px 0px 2px -2px rgba(0,0,0,0.1); 
+  min-width: 200px;
 }
 .sidebar .logo a {
   color: #232323;
