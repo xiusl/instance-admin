@@ -76,21 +76,24 @@
         >
       </el-table-column>
       <el-table-column
-        label="图片">
+        prop="is_spider"
+        label="标签"
+        width="100"
+        >
         <template slot-scope="scope">
-          <img height="60" :src="scope.row.images[0]">
-     <!--     <template v-for="im in scope.row.images">
-            <img height="60" :src="im">
-     </template> -->
+          <el-tag
+            :type="scope.row.is_spider == 1 ? 'primary' : 'success'"
+            disable-transitions>{{scope.row.is_spider == 1 ? '爬虫' : '投稿'}}</el-tag>
         </template>
       </el-table-column>
       <el-table-column
-        width="140"
+        width="160"
         label="操作"
         >
         <template slot-scope="scope">
           <el-button @click="handleDeleteClick(scope.row)" type="text" size="small">删除</el-button>
           <el-button @click="handleEditClick(scope.row)" type="text" size="small">编辑内容</el-button>
+          <el-button @click="handleEdit2Click(scope.row)" type="text" size="small">编辑</el-button>
         </template>
       </el-table-column>
 
@@ -105,15 +108,25 @@
       </el-pagination>
       <div>文章总数：{{count}}</div>
     </div>
+    <EditArt
+      :visible="editVisible"
+      ref="addAlert"
+      @hideCallback="editHideHandle"
+      @confirmCallback="editConfirmHandle" />
+
   </div>
 </template>
 
 <script>
 import moment from 'moment';
 import ArtApi from '@/api/article'
+import EditArt from './EditArt';
 
 export default {
   name: 'articleList',
+  components: {
+    EditArt
+  },
   data() {
     return {
       options: [
@@ -142,7 +155,8 @@ export default {
       article: [],
       activeTab: "list",
       cursor: '',
-      direction: 1
+      direction: 1,
+      editVisible: false
     }
   },
   created() {
@@ -201,6 +215,24 @@ export default {
       if (tab.name == 'source') {
         this.$router.push({path: '/art/source'})
       }
+    },
+    handleEdit2Click(row) {
+      this.$refs.addAlert.getArticle(row)
+      this.editVisible = true
+    },
+    editHideHandle() {
+      this.editVisible = false
+    },
+    editConfirmHandle(val) {
+      this.editVisible = false
+      var d = {
+        'title': val['title'],
+        'author': val['author'],
+        'spider': val['is_spider'] ? 1 : 0
+      }
+      ArtApi.editContent(val['id'], d).then(data => {
+        this.$message({message:'编辑成功', type:'success'})
+      })
     }
   }
 }
