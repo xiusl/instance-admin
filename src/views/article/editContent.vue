@@ -1,8 +1,11 @@
 <template>
   <div class="edit-content" style="padding: 0 20px">
-    <h3>Edit Content</h3>
-    <el-button @click="autoFormatSelection">formate</el-button>
-    <el-button @click="save()"></el-button>
+    <h3 style="margin: 0;">Edit Content</h3>
+    <div style="margin: 12px 0;">
+      <el-button @click="formatCode" size="mini">格式化</el-button>
+      <el-button @click="componseCode" size="mini">压缩</el-button>
+      <el-button @click="save()" size="mini">保存</el-button>
+    </div>
     <div style="display:flex;">
     <textarea ref="codeEdit" class="code" :style="{height: tableHeight+ 'px'}"></textarea>
       <div style="min-width: 320px; max-width: 360px; overflow-x:hidden;padding:10px;line-height:1.5em;" :style="{height: tableHeight+ 'px'}" class="content">
@@ -23,6 +26,8 @@ require("codemirror/addon/selection/active-line");
 require("codemirror/addon/hint/show-hint");
 import '../../utils/formatting'
 import ArtApi from '@/api/article';
+import { style_html } from './format'
+
 export default {
   name: 'EditContent',
   data() {
@@ -60,20 +65,34 @@ export default {
       })
     },
     save() {
+      this.componseCode()
       ArtApi.editContent(this.id, {'trans_text': this.code}).then(data => {
         this.$message({message:'编辑成功',type:'success'})
         this.$router.push({path:'/art/'+this.id})
       })      
     },
-
-      getSelectedRange() {
-        return { from: this.editor.getCursor(true), to: this.editor.getCursor(false) };
-      },
-
-      autoFormatSelection() {
-        var range = this.getSelectedRange();
-        this.editor.autoFormatRange(range.from, range.to);
-      }
+    getSelectedRange() {
+      return { from: this.editor.getCursor(true), to: this.editor.getCursor(false) };
+    },
+    formatCode() {
+      var data = this.editor.getValue()
+      var f = style_html(data, 4, ' ')
+      this.editor.setValue(f)
+      this.code = f
+    },
+    componseCode() {
+      var rep = /\n+/g;
+      var repone = /<!--.*?-->/ig;
+      var reptwo = /\/\*.*?\*\//ig;
+      var reptree = /[ ]+</ig;
+      var data = this.editor.getValue()
+      var sourceZero = data.replace(rep,"");
+      var sourceOne = sourceZero.replace(repone,"");
+      var sourceTwo = sourceOne.replace(reptwo,"");
+      var sourceTree = sourceTwo.replace(reptree,"<"); 
+      this.editor.setValue(sourceTree)
+      this.code = sourceTree
+    }
   }
 }
 </script>
