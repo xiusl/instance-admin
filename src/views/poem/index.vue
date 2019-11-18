@@ -19,13 +19,26 @@
         <el-table-column prop="author" label="author" width="100px"
           show-overflow-tooltip>
         </el-table-column>
+        <el-table-column width="260px">
+          <template slot="header" slot-scope="scope">
+            <div style="display:flex;">
+            <el-input
+              v-model="search"
+              size="mini"
+              placeholder="输入关键字搜索"
+              style="line-height:28px;">
+            </el-input>
+            <el-button @click="searchClick()" size="mini" style="height:28px;">s</el-button>  
+            </div>
+          </template>
+        </el-table-column>
       </el-table>
     </div>
     <div style="display:flex;justify-content: space-between;margin-top:10px;">
       <el-pagination
         hide-on-single-page
         @current-change="pageChange"
-        layout="prev, next"
+        layout="prev, pager,next"
         :total="count"
         :page-size="pageSize">
       </el-pagination>
@@ -43,13 +56,16 @@
         <el-table-column prop="name" label="name" width="160px"
           show-overflow-tooltip>
         </el-table-column>
+        <el-table-column prop="poems_count" label="count" width="160px"
+          show-overflow-tooltip>
+        </el-table-column>
       </el-table>
     </div>
     <div style="display:flex;justify-content: space-between;margin-top:10px;">
       <el-pagination
         hide-on-single-page
         @current-change="pageChange"
-        layout="prev, next"
+        layout="prev, pager, next"
         :total="count"
         :page-size="pageSize">
       </el-pagination>
@@ -75,15 +91,16 @@ export default {
       page: 1,
       activeName: 'list',
       count2: 0,
-      page2: 1
+      page2: 1,
+      search: ''
     }
   },
   mounted() {
     this.loadPoems(1, this.pageSize) 
   },
   methods: {
-    loadPoems(page, count) {
-      PoemApi.getPoems(page, count).then(data => {
+    loadPoems(page, count, author='') {
+      PoemApi.getPoems(page, count, author).then(data => {
         this.poems = data['poems']
         this.count = data['count']
       })
@@ -94,7 +111,7 @@ export default {
         this.loadAuthors(this.page2, this.pageSize)
       } else {
         this.page = page
-        this.loadPoems(page, this.pageSize)
+        this.loadPoems(page, this.pageSize, this.search)
       }
     },
     loadAuthors(page, count) {
@@ -109,8 +126,12 @@ export default {
       if (name == 'author') {
         this.loadAuthors(this.page2, this.pageSize)
       } else {
+        this.search = ''
         this.loadPoems(this.page, this.pageSize)
       }
+    },
+    searchClick() {
+      this.loadPoems(this.page, this.pageSize, this.search)
     }
   }
 }
