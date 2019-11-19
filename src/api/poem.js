@@ -14,6 +14,13 @@ const PoemApi = {
       method: 'get',
       params: {page:page, count:count}
     })
+  },
+  getTags(page, count) {
+    return request({
+      url: '/p/tags',
+      method: 'get',
+      params: {page:page, count:count}
+    })
   }
 }
 
