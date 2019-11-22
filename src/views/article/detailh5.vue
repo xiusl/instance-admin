@@ -97,4 +97,7 @@ export default {
             margin-bottom: 3px;
             display: block;
         }
+pre p {
+  margin: 0;
+}
 </style>
