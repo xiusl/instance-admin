@@ -12,7 +12,7 @@
         </div>
         </div>
       </template>
-      <p style="text-align:center;font-size:10px;color:#A5A2A1">文章已转码，<a style="color:#A5A2A1;" :href="article.original_url" _block="target">原文链接</a></p>
+      <p style="text-align:center;font-size:10px;color:#A5A2A1">文章已转码，<a style="color:#A5A2A1;" :href="article.original_url" target="_block">原文链接</a></p>
     </div>
   </div>
 </template>
