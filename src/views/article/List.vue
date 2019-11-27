@@ -8,14 +8,6 @@
     </div>
     <div style="text-align:left">
       <el-input v-model="url" placeholder="url" style="width:480px;"></el-input>
-      <el-select v-model="type" placeholder="请选择">
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value">
-      </el-option>
-      </el-select>
       <el-button @click="add">添加</el-button>
     </div>
     <el-table
@@ -129,24 +121,6 @@ export default {
   },
   data() {
     return {
-      options: [
-        {
-          value: 'weibo',
-          label: '微博'
-        },
-        {
-          value: 'wechat',
-          label: '微信'
-        },
-        {
-          value: 'kr36',
-          label: '36氪'
-        },
-        {
-          value: 'laohu',
-          label: '老虎证券'
-        }
-      ],
       type: 'weibo',
       url: '',
       count: 0,

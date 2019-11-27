@@ -3,7 +3,7 @@
     <h3>{{article.title}}</h3>
     <div style="font-size:14px;"><span>{{article.author}} · </span><span>{{article.published_at}}</span></div>
     <div class="content">
-      <p v-html="article.transcoding"></p>
+      <p v-html="article.transcoding" style="text-align:justify;"></p>
 
       <template v-if="article.type=='weibo'">
         <div class="sudoku_row1">
@@ -12,6 +12,7 @@
         </div>
         </div>
       </template>
+      <p style="text-align:center;font-size:10px;color:#A5A2A1">文章已转码，<a style="color:#A5A2A1;" :href="article.original_url" _block="target">原文链接</a></p>
     </div>
   </div>
 </template>
