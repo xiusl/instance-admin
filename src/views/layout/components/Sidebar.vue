@@ -36,7 +36,8 @@ export default {
         {label:'文章',value:'art',path:'/art'},
         {label:'用户',value:'users',path:'/users'},
         {label:'来源',value:'source',path:'/source'},
-        {label:'有诗',value:'poem',path:'/poem'}
+        {label:'有诗',value:'poem',path:'/poem'},
+        {label:'动态',value:'status',path:'/status'}
       ],
       curitem: ''
     }
