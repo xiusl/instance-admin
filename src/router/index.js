@@ -12,6 +12,7 @@ export const constantRouteMap = [
     component: () => import('@/views/article/detailh5.vue'),
     meta: { title: '哩嗑' }
   },
+  { path: '/privacy', component: () => import('@/views/setting/privacy'), meta: { title: '哩嗑'}},
   {path: '/', component: Layout},
   {
     path: '/art', 
