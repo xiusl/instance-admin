@@ -47,6 +47,14 @@ const UserApi = {
       data
     })
   },
+  loginByPhoneCode(phone, code) {
+    const data = {phone, code}
+    return request({
+      url: '/authorizations',
+      method: 'post',
+      data 
+    })
+  },
   getUploadToken(type) {
     return request({
       url: '/settings',

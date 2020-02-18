@@ -3,7 +3,7 @@ import store from './store'
 import { Message } from 'element-ui'
 import { getToken } from '@/utils/auth' // getToken from cookie
 
-const whiteList = ['/login', '/privacy', '/articles']
+const whiteList = ['/login', '/register', '/privacy', '/articles']
 
 router.beforeEach((to, from, next) => {
     // next()

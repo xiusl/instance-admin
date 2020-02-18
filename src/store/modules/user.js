@@ -17,6 +17,20 @@ const user = {
     }
   },
   actions: {
+    LoginByPhoneCode({ commit }, userInfo) {
+      const phone = userInfo.phone.trim()
+      const code = userInfo.code.trim()
+      return new Promise((resolve, reject) => {
+        UserApi.loginByPhoneCode(phone, code).then(data => {
+          commit('SET_TOKEN', data.token)
+          commit('SET_NAME', data.name)
+          resolve(data)
+        })
+        .catch(error => {
+          reject(error)
+        })
+      })
+    },
     LoginByPhonePwd({ commit }, userInfo) {
       const phone = userInfo.phone.trim()
       const password = userInfo.password.trim()

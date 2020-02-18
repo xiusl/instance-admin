@@ -7,6 +7,7 @@ import Layout from '@/views/layout/Layout'
 
 export const constantRouteMap = [
   {path: '/login', component: () => import('@/views/auth/login'), hidden: true, meta: { title: '登录'}},
+  {path: '/register', component: () => import('@/views/auth/register'), hidden: true, meta: { title: '注册'}},
   {
     path: '/articles/:id', 
     component: () => import('@/views/article/detailh5.vue'),
