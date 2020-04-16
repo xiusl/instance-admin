@@ -16,6 +16,7 @@ service.interceptors.request.use(config => {
 	} else {
 		config.headers['Content-Type'] = 'application/json'
 	}
+  config.headers['X-Type'] = 'web'
 
 	return config
 }, error => {
