@@ -50,7 +50,7 @@ export default {
             this.$router.push({path: '/'})
         })
         .catch(err => {
-          this.$message({message:'登录失败', type:'error'})
+          this.$message({message:err, type:'error'})
         })
     },
     showPassword() {

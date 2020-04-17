@@ -61,29 +61,22 @@
         width="80">
       </el-table-column>
       <el-table-column
-        prop="published_at"
-        label="发布日期"
-        width="200"
-        :formatter="dateFormat"
-        >
-      </el-table-column>
-      <el-table-column
         prop="is_spider"
         label="标签"
-        width="100"
+        style="font-size:10px;"
         >
         <template slot-scope="scope">
           <el-tag
             :type="scope.row.is_spider == 1 ? 'primary' : 'success'"
             disable-transitions>{{scope.row.is_spider == 1 ? '爬虫' : '投稿'}}</el-tag>
+          <el-tag :type="scope.row.status == 0 ? 'success' : 'primary'" disable-transitions>{{scope.row.status == 0 ? '显示' : '不显示'}}</el-tag>
         </template>
       </el-table-column>
       <el-table-column
-        width="160"
         label="操作"
         >
         <template slot-scope="scope">
-          <el-button @click="handleDeleteClick(scope.row)" type="text" size="small">删除</el-button>
+          <el-button @click="handleDeleteClick(scope.row)" type="text" size="small">不展示</el-button>
           <el-button @click="handleEditClick(scope.row)" type="text" size="small">编辑内容</el-button>
           <el-button @click="handleEdit2Click(scope.row)" type="text" size="small">编辑</el-button>
         </template>

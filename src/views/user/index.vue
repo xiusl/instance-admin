@@ -1,12 +1,33 @@
 <template>
   <div class="user-list" style="padding: 0 32px;">
     <h3>123</h3>
-    <div style="text-align:left;">
-    <div v-for="u in users">
-      <img :src="u.avatar" style="width: 48px; height: 48px; float: left;border-radius: 50%;">
-      <p style="margin-left: 64px;margin-top:2px;">{{u.name}}</p>
-      <p style="margin-left: 64px;margin-top:2px;">{{u.desc}}</p>
-    </div>
+    <div>
+        <el-table
+      :data="users"
+      style="width: 100%">
+        <el-table-column
+        prop="avatar"
+        label="头像"
+        width="100"
+        >
+            <template slot-scope="scope">
+                <el-avatar size='32' :src="scope.row.avatar"></el-avatar>
+            </template>
+        </el-table-column>
+        <el-table-column
+        prop="name"
+        label="Name"
+        width="180">
+      </el-table-column>
+        <el-table-column
+        prop="desc"
+        label="Desc">
+      </el-table-column>
+      <el-table-column
+        prop="type"
+        label="Type">
+    </el-table-column>
+      </el-table>
     </div>
   </div>
 </template>

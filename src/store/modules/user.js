@@ -27,7 +27,7 @@ const user = {
           resolve(data)
         })
         .catch(error => {
-          reject(error)
+          reject(error['error'])
         })
       })
     },
@@ -43,7 +43,7 @@ const user = {
             resolve(data)
           })
           .catch(error => {
-            reject(error)
+            reject(error['error'])
           })
       })
     },
