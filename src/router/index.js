@@ -89,6 +89,13 @@ export const constantRouteMap = [
     children: [
       { path: '', component: () => import('@/views/status/list') }
     ]
+  },
+  {
+    path: '/feedback',
+    component: Layout,
+    children: [
+      {path: '', component: () => import('@/views/feedback/index')}
+    ]
   }
 ]
 
