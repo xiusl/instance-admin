@@ -30,7 +30,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .container {
   background: url('https://cdn.pixabay.com/photo/2020/05/05/17/52/sky-5134180_1280.jpg');
   width: 100%;
