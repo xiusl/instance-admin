@@ -15,6 +15,7 @@ export const constantRouteMap = [
   },
   { path: '/privacy', component: () => import('@/views/setting/privacy'), meta: { title: '哩嗑'}},
   { path: '/help', component: () => import('@/views/setting/help'), meta: { title: '哩嗑' }},
+  { path: '/usage', component: () => import('@/views/setting/usage'), meta: { title: '哩嗑'}},
   {path: '/', component: Layout},
   {
     path: '/art', 
