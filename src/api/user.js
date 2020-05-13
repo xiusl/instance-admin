@@ -85,6 +85,12 @@ const UserApi = {
       methods: 'post',
       params: {page:page, count:count}
     })
+  },
+  getLogs(page, count) {
+    return request({
+      url: '/logs',
+      params: {page:page,count:count}
+    })
   }
 }
 export default UserApi;

@@ -9,5 +9,5 @@ module.exports = merge(prodEnv, {
   },
   NODE_ENV: '"development"',
 //  BASE_URL: '"https://ins-api.sleen.top/"'
-  BASE_URL: '"http://127.0.0.1:5000/"'
+  BASE_URL: '"http://127.0.0.1:5051/"'
 })
