@@ -1,10 +1,15 @@
 <template>
-<div style="padding: 16px;">
+<div style="padding:0 32px;">
   
-  <div style="text-align:left;">  <h3>反馈</h3></div>
+  <div style="text-align:left;">
+    <h3 style="margin-top:0;margin-bottom:6px;">反馈</h3>
+  </div>
   <div>
-    <el-table :data="feedbacks"
-        style="width:100%">
+    <el-table
+      ref="table"
+      :data="feedbacks"
+      :height="tableHeight"
+      style="width:100%">
       <el-table-column
         prop="user.name"
         label="Name">
@@ -14,13 +19,24 @@
         label="内容">
       </el-table-column>
       <el-table-column
+        prop="obj"
+        label="关联对象"
+        :show-overflow-tooltip="true"
+        >
+        <template slot-scope="scope">
+          <a :href="scope.row.obj_url">{{scope.row.obj ? scope.row.obj.title : '' }} {{scope.row.obj ? scope.row.obj.content : ''}}</a>
+        </template>
+      </el-table-column>
+      <el-table-column
         prop="created_at"
         label="时间"
+        width="120"
         :formatter='dateFormat'>
       </el-table-column>
       
       <el-table-column
         prop="status"
+        width="80"
         label="状态">
         <template slot-scope="scope">
           <el-tag :type="scope.row.status == 1 ? 'success':'primary'">{{scope.row.status == 1 ? '已回复': '未处理'}}</el-tag>
@@ -55,6 +71,7 @@ export default {
   name: 'feedbackindex',
   data() {
     return {
+      tableHeight: null,
       page: 1,
       count: 10,
       feedbacks: [],
@@ -62,12 +79,25 @@ export default {
     }
   },
   mounted() {
+    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 130
     this.loadData()
   },
   methods: {
     loadData() {
       FeedbackApi.getFeedbacks(this.page, this.count).then(data => {
-        this.feedbacks = data['data']
+        var items = data['data']
+        var ns = []
+        for (var i in items) {
+          var item = items[i]
+          var obj_url = item['obj_url']
+          if (obj_url.indexOf('article') != -1) {
+            obj_url = obj_url.replace('articles', 'art')
+          }
+          item['obj_url'] = obj_url
+          ns.push(item)
+        }
+        console.log(ns[0])
+        this.feedbacks = items
         this.allcount = data['count']
       })
     },
