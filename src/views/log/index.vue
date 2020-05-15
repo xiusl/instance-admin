@@ -9,7 +9,10 @@
         style="width: 100%;">
         <el-table-column
         prop="user_id"
-        label="User">
+        label="User"
+        :formatter='idFormat'
+        width=80
+        >
         </el-table-column>
         <el-table-column
         prop="ip"
@@ -17,6 +20,7 @@
       </el-table-column>
         <el-table-column
         prop="device_type"
+        width=80
         label="Device">
       </el-table-column>
       <el-table-column
@@ -29,10 +33,11 @@
      <div style="display:flex;justify-content: space-between;margin-top:10px;">
       <el-pagination
         @current-change="pageChange"
-        layout="prev, next"
+        layout="prev, pager, next"
         :total="count"
         :page-size="pageSize">
       </el-pagination>
+      <div>总数: {{count}}</div>
     </div>
     </div>
   </div>
@@ -53,7 +58,7 @@ export default {
     }
   },
   mounted() {
-      this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop-180;
+      this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop-125;
     this.loadData()
   },
     methods: {
@@ -67,7 +72,12 @@ export default {
              pageChange(page) {
         this.page = page
         this.loadData()
-             }
+             },
+            idFormat(row, column) {
+                var id = row[column.property]
+                if (id.length <= 6) return id
+                return '*'+id.substr(id.length-6, id.length)
+            }
 }
 }
 </script>

@@ -4,37 +4,26 @@
       ref="table"
       :data="statuses"
       :height="tableHeight"
-      style="width: 100%;margin-top:20px;"
+      style="width: 100%;margin-top:0px;"
       >
       <el-table-column
         type="index"
         width="40">
       </el-table-column>
-<!--      <el-table-column
-        prop="id"
-        label="id"
-        width="100"
-        show-overflow-tooltip>
-        <template slot-scope="scope">
-          <router-link :to="{path:'/art/'+scope.row.id}">
-            {{scope.row.id}}
-          </router-link>
-        </template>
-      </el-table-column>
--->
+
       <el-table-column
         prop="content"
         label="内容"
-        width="220"
         show-overflow-tooltip>
       </el-table-column>
-      </el-table-column> -->
+      
       <el-table-column
         prop="user.name"
         label="作者"
         width="100"
         show-overflow-tooltip>
       </el-table-column>
+      
       <el-table-column
         prop="images"
         label="图片"
@@ -42,10 +31,16 @@
         show-overflow-tooltip>
         <template slot-scope="scope">
           <div v-if="scope.row.images.length > 0">
-            <img :src="scope.row.images[0].url" height="48px">
+            <el-image 
+              :src="scope.row.images[0].url" 
+              style="height:48px;" 
+              fit="scale-down" 
+              :preview-src-list="[scope.row.images[0].url]">
+            </el-image>
           </div>
         </template>
       </el-table-column>
+
       <el-table-column
         prop="created_at"
         label="发布日期"
@@ -53,13 +48,22 @@
         :formatter="dateFormat"
         >
       </el-table-column>
+
       <el-table-column
         width="160"
         label="操作"
         >
         <template slot-scope="scope">
-          <el-button @click="handleDeleteClick(scope.row)" type="text" size="small">删除</el-button>
-          <el-button @click="handleEdit2Click(scope.row)" type="text" size="small">编辑</el-button>
+          <el-button 
+            @click="handleReportClick(scope.row)" 
+            type="text" size="small">
+              {{ scope.row.status == -110 ? '处理举报' : '' }}
+          </el-button>
+          <el-button 
+            @click="handleDeleteClick(scope.row)" 
+            type="text" size="small">
+                {{ scope.row.status == -2 ? '恢复' : '删除'}}
+          </el-button>
         </template>
       </el-table-column>
 
@@ -68,12 +72,29 @@
       <el-pagination
         hide-on-single-page
         @current-change="pageChange"
-        layout="prev, next"
+        layout="prev, pager, next"
         :total="count"
         :page-size="pageSize">
       </el-pagination>
       <div>动态总数：{{count}}</div>
     </div>
+
+
+
+<el-dialog title="处理举报" :visible.sync="reportFormVisible">
+  <el-form :model="reportForm">
+    <el-form-item label="活动名称">
+      <el-input v-model="reportForm.title" autocomplete="off"></el-input>
+    </el-form-item>
+    <el-form-item label="活动区域">
+        <el-input v-model="reportForm.replay" autocomplete="off"></el-input>
+    </el-form-item>
+  </el-form>
+  <div slot="footer" class="dialog-footer">
+    <el-button @click="reportFormVisible = false">取 消</el-button>
+    <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+  </div>
+</el-dialog>
 
   </div>
 </template>
@@ -97,13 +118,19 @@ export default {
       activeTab: "list",
       cursor: '',
       direction: 1,
-      editVisible: false
+      editVisible: false,
+      reportFormVisible: false,
+      reportForm: {
+        title: '',
+        id: '',
+        replay: ''
+      }
     }
   },
   created() {
   },
   mounted() {
-    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop-180;
+    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop-125;
     this.loadStatuses()
   },
   methods: {
@@ -117,7 +144,7 @@ export default {
       var dateStr = row[column.property]
       if (!dateStr) return "";
       var date = new Date(dateStr)
-      return moment(date).format("YYYY-MM-DD HH:mm:ss")
+      return moment(date).format("MM-DD HH:mm")
     },
     pageChange(page) {
       this.page = page
@@ -131,31 +158,8 @@ export default {
         })
       })
     },
-    handleEditClick(row) {
-      this.$router.push({path:'art/'+ row.id+'/editcontent'})
-    },
-    tabClick(tab, event) {
-      if (tab.name == 'source') {
-        this.$router.push({path: '/art/source'})
-      }
-    },
-    handleEdit2Click(row) {
-      this.$refs.addAlert.getArticle(row)
-      this.editVisible = true
-    },
-    editHideHandle() {
-      this.editVisible = false
-    },
-    editConfirmHandle(val) {
-      this.editVisible = false
-      var d = {
-        'title': val['title'],
-        'author': val['author'],
-        'spider': val['is_spider'] ? 1 : 0
-      }
-      ArtApi.editContent(val['id'], d).then(data => {
-        this.$message({message:'编辑成功', type:'success'})
-      })
+    handleReportClick(row) {
+       this.reportFormVisible = true 
     }
   }
 }

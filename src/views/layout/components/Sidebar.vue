@@ -31,8 +31,8 @@ export default {
   data() {
     return {
       navitems: [
-        {label:'统计',value:'dashboard',path:'/dashboard'},
-        {label:'一言',value:'say',path:'/say'},
+//        {label:'统计',value:'dashboard',path:'/dashboard'},
+//        {label:'一言',value:'say',path:'/say'},
         {label:'文章',value:'art',path:'/art'},
         {label:'用户',value:'users',path:'/users'},
         {label:'来源',value:'source',path:'/source'},
@@ -55,10 +55,9 @@ export default {
 
 <style scoped>
 .sidebar {
-  width: 200px; 
   background-color: #fff;
   box-shadow: 3px 0px 2px -2px rgba(0,0,0,0.1); 
-  min-width: 200px;
+  min-width: 160px;
 }
 .sidebar .logo a {
   color: #232323;

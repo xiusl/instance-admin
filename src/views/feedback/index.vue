@@ -79,7 +79,7 @@ export default {
     }
   },
   mounted() {
-    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 130
+    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 125
     this.loadData()
   },
   methods: {
