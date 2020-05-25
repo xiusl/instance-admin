@@ -1,7 +1,7 @@
 <template>
   <div class="article-h5">
     <h3>{{article.title}}</h3>
-    <div style="font-size:14px;"><span>{{article.author + ' · '}}</span><span>{{article.published_at}}</span></div>
+    <div style="font-size:14px;" v-if="article.title.length > 0"><span>{{article.author + ' · '}}</span><span>{{article.published_at}}</span></div>
     <div class="content">
       <p v-html="article.transcoding" style="text-align:justify;"></p>
 
