@@ -1,7 +1,7 @@
 <template>
   <div class="article-h5">
     <h3>{{article.title}}</h3>
-    <div style="font-size:14px;"><span>{{article.author}} · </span><span>{{article.published_at}}</span></div>
+    <div style="font-size:14px;"><span>{{article.author + ' · '}}</span><span>{{article.published_at}}</span></div>
     <div class="content">
       <p v-html="article.transcoding" style="text-align:justify;"></p>
 
@@ -12,7 +12,7 @@
         </div>
         </div>
       </template>
-      <p style="text-align:center;font-size:10px;color:#A5A2A1">文章已转码，<a style="color:#A5A2A1;" :href="article.original_url" target="_block">原文链接</a></p>
+      <p v-if="article.title.length > 0" style="text-align:center;font-size:10px;color:#A5A2A1">文章已转码，<a style="color:#A5A2A1;" :href="article.original_url" target="_block">原文链接</a></p>
     </div>
   </div>
 </template>
