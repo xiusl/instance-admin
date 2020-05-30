@@ -24,6 +24,11 @@
         label="Device">
       </el-table-column>
       <el-table-column
+        prop="method"
+        width=60
+        label="Method">
+      </el-table-column>
+      <el-table-column
         prop="path"
         label="Path">
     </el-table-column>
