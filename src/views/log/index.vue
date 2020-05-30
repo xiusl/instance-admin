@@ -25,7 +25,7 @@
       </el-table-column>
       <el-table-column
         prop="method"
-        width=60
+        width=82
         label="Method">
       </el-table-column>
       <el-table-column
