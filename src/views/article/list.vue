@@ -23,7 +23,7 @@
       <el-table-column
         prop="id"
         label="id"
-        width="100"
+        width="80"
         show-overflow-tooltip>
         <template slot-scope="scope">
           <router-link :to="{path:'/art/'+scope.row.id}">
@@ -204,3 +204,11 @@ export default {
   }
 }
 </script>
+
+<style>
+.el-table__body {
+    width: 100%;
+    table-layout: fixed !important;
+}
+
+</style>
