@@ -24,6 +24,10 @@
         label="Desc">
       </el-table-column>
       <el-table-column
+        prop="phone"
+        label="Phone">
+      </el-table-column>
+      <el-table-column
         prop="type"
         label="Type">
     </el-table-column>
