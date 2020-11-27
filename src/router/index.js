@@ -105,7 +105,20 @@ export const constantRouteMap = [
     children: [
         {path: '', component: () => import('@/views/log/index')}
     ]
-  }
+  },
+  {
+    path: '/products',
+    component: Layout,
+    children: [
+        { path: '', component: () => import('@/views/products/index') },
+        {path: ':id', component: () => import('@/views/products/detail')} 
+    ]
+  },
+    {
+        path: '/products/:id/versions/:v_id', 
+        component: () => import('@/views/products/version')
+    }
+
 ]
 
 export default new Router({

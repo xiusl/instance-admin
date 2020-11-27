@@ -39,7 +39,8 @@ export default {
         {label:'有诗',value:'poem',path:'/poem'},
         {label:'动态',value:'status',path:'/status'},
         {label:'反馈',value:'feedback',path:'/feedback'},
-        {label:'日志',value:'logs',path:'/logs'}
+        {label:'日志',value:'logs',path:'/logs'},
+        {label:'应用',value:'products',path:'/products'}
       ],
       curitem: ''
     }

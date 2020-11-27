@@ -45,3 +45,26 @@ export function uploadImage(file, token, callback) {
 
   })
 }
+
+export function uploadToQingCloud(file, filename, token, headers, callback) {
+    let url = 'http://pek3b.qingstor.com' +  filename
+//    var fd = new FormData()
+//    fd.append('Content-Type', file.type)
+//    fd.append('file', file)
+    let config = {
+        headers: {
+            'Content-Type': file.type,
+            'Authorization': token,
+            'X-QS-Date': headers['Date']
+        }
+    }
+    console.log(url)
+    console.log(config)
+    
+    axios({
+        url: url,
+        headers: config.headers,
+        method: 'PUT',
+        data: file
+    })
+}

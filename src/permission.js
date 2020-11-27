@@ -15,7 +15,8 @@ router.beforeEach((to, from, next) => {
         }
     } else {
       var re = new RegExp(/articles\/[a-f\d]{24}$/)
-      if (re.test(to.path)) {
+      var re1 = new RegExp(/products(\/[a-f\d]{24})\/versions\/[a-f\d]{24}$/)
+      if (re.test(to.path) || re1.test(to.path)) {
         next()
         return 
       }
