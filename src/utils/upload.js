@@ -1,5 +1,6 @@
 import SparkMD5 from 'spark-md5'
 import axios from 'axios'
+import { QingStor, Config } from 'qingstor-sdk.min';
 
 export function getFileMD5(file, callBack) {
   var fileReader = new FileReader(),
@@ -46,25 +47,41 @@ export function uploadImage(file, token, callback) {
   })
 }
 
+/*
 export function uploadToQingCloud(file, filename, token, headers, callback) {
-    let url = 'http://pek3b.qingstor.com' +  filename
-//    var fd = new FormData()
-//    fd.append('Content-Type', file.type)
-//    fd.append('file', file)
+    const config = new Config().loadConfig({
+        'host': 'qingstor.com',
+        'port': '443',
+        'protocol': 'https',
+        'log_level': 'debug',
+    });
+    console.log(config)
+    const qsService = new QingStor(config);
+    const bucket = qsService.Bucket('likebit', 'pek3b');
+    
+    const putObjectRequest = bucket.putObjectRequest(file.name, file);
+    putObjectRequest.applySignature(token)
+    req.send((error, response) => {
+                if (error) {
+                    console.log(req.url + " request failed", error);
+                    return
+                }
+                console.log(req.url + ' finished request.');
+                console.log(response);
+            });
+
+}
+*/
+export function uploadToQingCloud(file, filename, token, headers, callback) {
+    let url = 'http://likebit.pek3b.qingstor.com/' + file.name
     let config = {
         headers: {
             'Content-Type': file.type,
-            'Authorization': token,
-            'X-QS-Date': headers['Date']
+            'Authorization': token
         }
     }
-    console.log(url)
-    console.log(config)
     
-    axios({
-        url: url,
-        headers: config.headers,
-        method: 'PUT',
-        data: file
+    axios.put(url, file, config).then(res => {
+        console.log(res)
     })
 }
