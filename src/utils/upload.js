@@ -1,6 +1,5 @@
 import SparkMD5 from 'spark-md5'
 import axios from 'axios'
-import { QingStor, Config } from 'qingstor-sdk.min';
 
 export function getFileMD5(file, callBack) {
   var fileReader = new FileReader(),
@@ -72,16 +71,16 @@ export function uploadToQingCloud(file, filename, token, headers, callback) {
 
 }
 */
-export function uploadToQingCloud(file, filename, token, headers, callback) {
-    let url = 'http://likebit.pek3b.qingstor.com/' + file.name
+export function uploadToQingCloud(file, token, date, filename, callback) {
+    let url = 'https://likebit.pek3b.qingstor.com/' + filename
     let config = {
         headers: {
-            'Content-Type': file.type,
-            'Authorization': token
+            'Content-Type': file.type == "" ? "application/octet-stream" : file.type,
+            'Authorization': token,
+            'x-qs-date': date
         }
-    }
-    
+    } 
     axios.put(url, file, config).then(res => {
-        console.log(res)
+        callback(res)
     })
 }

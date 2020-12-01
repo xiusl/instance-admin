@@ -39,6 +39,13 @@ const ProApi = {
         method: 'post',
         data: data
     })
+  },
+  putProductsVersion(id, data) {
+    return request({
+        url: '/products/' + id + '/versions',
+        method: 'post',
+        data: data
+    })
   }
 }
 
