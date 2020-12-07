@@ -12,7 +12,7 @@
         <el-table-column type="index"/>
             <el-table-column prop="id"   label="History"> 
             <template slot-scope="scope">
-                <router-link :to="{path:'/products/'+product.id+'/version/'+scope.row.id}" :style="{color: scope.row.id==version.id ? '#999': '#00f'}"> 
+                <router-link :to="{path:'/products/'+product.id+'/versions/'+scope.row.id}" :style="{color: scope.row.id==version.id ? '#999': '#00f'}"> 
                     {{scope.row.name}}({{scope.row.code}})
                 </router-link>
             </template>
