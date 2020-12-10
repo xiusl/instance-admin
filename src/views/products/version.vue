@@ -37,6 +37,13 @@ export default {
             v_id: ''
         }
     },
+    watch: {
+		$route() {
+			this.v_id= this.$route.params.v_id;
+            this.loadVersion()
+            this.loadVersions()
+		}
+	},
     mounted() {
         this.p_id = this.$route.params.id
         this.v_id = this.$route.params.v_id

@@ -13,6 +13,10 @@ export const constantRouteMap = [
     component: () => import('@/views/article/detailh5.vue'),
     meta: { title: '哩嗑' }
   },
+    {
+        path: '/products/:id/versions/:v_id', 
+        component: () => import('@/views/products/version')
+    },
   { path: '/privacy', component: () => import('@/views/setting/privacy'), meta: { title: '哩嗑'}},
   { path: '/help', component: () => import('@/views/setting/help'), meta: { title: '哩嗑' }},
   { path: '/usage', component: () => import('@/views/setting/usage'), meta: { title: '哩嗑'}},
@@ -113,12 +117,7 @@ export const constantRouteMap = [
         { path: '', component: () => import('@/views/products/index') },
         {path: ':id', component: () => import('@/views/products/detail')} 
     ]
-  },
-    {
-        path: '/products/:id/versions/:v_id', 
-        component: () => import('@/views/products/version')
-    }
-
+  }
 ]
 
 export default new Router({
