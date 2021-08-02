@@ -144,16 +144,19 @@ export default {
         this.$message({message:'Need URL', type:'error'})
         return 
       }
-      ArtApi.spiderWeiboByUrl(this.url, this.type).then(data => {
-        this.getWeibo()
+      ArtApi.spiderByUrl(this.url).then(data => {
+        this.watchArticle()
       })
     },
-    getWeibo() {
+    this.watchArticle() {
       ArtApi.getWeiboByUrl(this.url).then(data => {
-        this.article.splice(0, 0, data)
+        if (data.ok === 2) {
+          this.page = 1
+          this.loadArticles()
+        }
       }).catch(err => {
         setTimeout(() => {
-          this.getWeibo()
+          this.this.watchArticle()
         }, 2000)
       })
     },

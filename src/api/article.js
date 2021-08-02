@@ -20,6 +20,21 @@ const ArtApi = {
       params: {url:url}
     })
   },
+  spiderByUrl(url) {
+    const data = {url}
+    return request({
+      url: '/spider',
+      method: 'post',
+      data
+    })
+  },
+  getTmpArticleByUrl(url) {
+    return request({
+      url: '/spider/articles',
+      method: 'get',
+      params: {url:url}
+    })
+  },
 
   getArticles(page, count) {
     return request({
