@@ -142,22 +142,26 @@ export default {
     add() {
       if (this.url.length == 0) {
         this.$message({message:'Need URL', type:'error'})
-        return 
+        return
       }
       ArtApi.spiderByUrl(this.url).then(data => {
         this.watchArticle()
       })
     },
-    this.watchArticle() {
-      ArtApi.getWeiboByUrl(this.url).then(data => {
+    watchArticle() {
+      ArtApi.getTmpArticleByUrl(this.url).then(data => {
         if (data.ok === 2) {
           this.page = 1
           this.loadArticles()
+        } else {
+          setTimeout(() => {
+          this.watchArticle()
+        }, 3000)
         }
       }).catch(err => {
         setTimeout(() => {
-          this.this.watchArticle()
-        }, 2000)
+          this.watchArticle()
+        }, 3000)
       })
     },
     dateFormat(row, column) {
@@ -173,9 +177,9 @@ export default {
     handleDeleteClick(row) {
       this.$confirm('确认要删除："'+row.title+'" ?').then(_ => {
         ArtApi.deleteArticle(row.id).then(data => {
-          this.$message({message:'删除成功', type:'success'}) 
+          this.$message({message:'删除成功', type:'success'})
           this.loadArticles()
-        }) 
+        })
       })
     },
     handleEditClick(row) {
